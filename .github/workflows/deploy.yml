@@ -10,21 +10,23 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Install Cloudflared on Runner
+      - name: Install Cloudflared
         run: |
           curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -o cloudflared
           chmod +x cloudflared
           sudo mv cloudflared /usr/local/bin/
 
-      - name: Deploy via SCP
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ssh.kunjidev.shop
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          # This tells GitHub to use the cloudflared tool to enter the tunnel
-          proxy_host: ssh.kunjidev.shop
-          proxy_command: /usr/local/bin/cloudflared access ssh --hostname %h
-          source: "index.html,style.css,script.js,pdfs/*,img/*"
-          target: "/data/data/com.termux/files/usr/share/nginx/html/"
+      - name: Setup SSH Key & Config
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          # This tells the system how to use the tunnel for this specific host
+          echo "Host ssh.kunjidev.shop
+            ProxyCommand /usr/local/bin/cloudflared access ssh --hostname %h
+            StrictHostKeyChecking no" > ~/.ssh/config
+
+      - name: Deploy via Native SCP
+        run: |
+          # We use the -r flag to copy everything to your Nginx folder
+          scp -r ./* ${{ secrets.SSH_USER }}@ssh.kunjidev.shop:/data/data/com.termux/files/usr/share/nginx/html/
