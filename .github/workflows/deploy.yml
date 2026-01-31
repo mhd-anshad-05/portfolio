@@ -2,6 +2,12 @@ name: Deploy Portfolio
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'index.html'
+      - 'style.css'
+      - 'script.js'
+      - 'img/**'
+      - 'pdfs/**'
 
 jobs:
   deploy:

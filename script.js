@@ -1,4 +1,4 @@
-// Project Data - Cloud & IT Focused
+// Real Cloud Infrastructure Projects
 const projects = [
   {
     id: 1,
@@ -6,9 +6,7 @@ const projects = [
     description: "Multi-AZ deployment using EC2, ALB, Auto Scaling, and RDS.",
     icon: "fa-network-wired",
     tags: ["AWS", "EC2", "ALB", "Auto Scaling", "RDS"],
-    github: "#",
-    demo: "#",
-    details: "Designed and deployed a highly available web application architecture on AWS with load balancing, auto scaling, and secure database placement in private subnets."
+    details: "Designed and deployed a highly available web application architecture on AWS with load balancing, auto scaling, and secure database placement in private subnets. Implemented health checks, multi-AZ redundancy, and automated failover mechanisms."
   },
   {
     id: 2,
@@ -16,9 +14,7 @@ const projects = [
     description: "Provisioned and managed EC2 instances using AWS CLI.",
     icon: "fa-terminal",
     tags: ["AWS CLI", "EC2", "IAM", "Linux"],
-    github: "#",
-    demo: "#",
-    details: "Managed EC2 lifecycle using AWS CLI including key pairs, security groups, SSH access, and resource cleanup."
+    details: "Managed complete EC2 lifecycle using AWS CLI including key pair generation, security group configuration, SSH access setup, instance provisioning, and automated resource cleanup. Developed shell scripts for common administrative tasks."
   },
   {
     id: 3,
@@ -26,51 +22,86 @@ const projects = [
     description: "Hosted PHP-based web application with Nginx and MySQL.",
     icon: "fa-server",
     tags: ["AWS", "Linux", "Nginx", "MySQL", "SSL"],
-    github: "#",
-    demo: "#",
-    details: "Deployed a database-driven web application on AWS EC2 using Linux, Nginx, MySQL, SSL, and custom domain configuration."
+    details: "Deployed a production database-driven web application on AWS EC2 using Linux, Nginx web server, MySQL database, SSL certificate configuration, and custom domain setup with Route 53. Implemented security best practices and performance optimization."
   },
   {
     id: 4,
     title: "Static Website Hosting on AWS S3",
     description: "Serverless static website using Amazon S3.",
     icon: "fa-cloud",
-    tags: ["AWS S3", "Static Hosting"],
-    github: "#",
-    demo: "#",
-    details: "Hosted a static website using AWS S3 with public access configuration and static website hosting enabled."
+    tags: ["AWS S3", "Static Hosting", "CloudFront"],
+    details: "Hosted a static website using AWS S3 with public access policies, static website hosting configuration, and CloudFront CDN integration for global content delivery. Configured custom domain and SSL certificates."
   },
   {
     id: 5,
     title: "Windows Server Active Directory Setup",
     description: "Configured domain controller and user management.",
     icon: "fa-windows",
-    tags: ["Windows Server", "Active Directory"],
-    github: "#",
-    demo: "#",
-    details: "Installed and configured Windows Server with Active Directory Domain Services, including user and group management."
+    tags: ["Windows Server", "Active Directory", "Group Policy"],
+    details: "Installed and configured Windows Server with Active Directory Domain Services. Set up domain controller, organizational units, user and group management, Group Policy Objects, and network authentication services for enterprise environment."
   }
 ];
 
-// Initialize
+// Documentation/PDF files - Add your actual PDF filenames here
+const documentation = [
+  {
+    id: 1,
+    title: "Resume",
+    description: "Professional CV",
+    icon: "fa-file-pdf",
+    filename: "resume.pdf"
+  },
+  {
+    id: 2,
+    title: "Highly Available Web Application on AWS",
+    description: "Multi-AZ deployment with screenshots",
+    icon: "fa-network-wired",
+    filename: "highly-available-web-app.pdf"
+  },
+  {
+    id: 3,
+    title: "AWS EC2 Management Using CLI",
+    description: "Step-by-step CLI guide",
+    icon: "fa-terminal",
+    filename: "ec2-cli-management.pdf"
+  },
+  {
+    id: 4,
+    title: "Website Deployment with Database",
+    description: "Nginx + MySQL setup guide",
+    icon: "fa-server",
+    filename: "website-database-deployment.pdf"
+  },
+  {
+    id: 5,
+    title: "Static Website Hosting on S3",
+    description: "S3 hosting configuration",
+    icon: "fa-cloud",
+    filename: "s3-static-hosting.pdf"
+  }
+];
+
+// Initialize everything when DOM loads
 document.addEventListener('DOMContentLoaded', () => {
     loadProjects();
+    loadDocumentation();
     initTheme();
     initNavigation();
     initTypingEffect();
     initScrollAnimations();
+    setCurrentYear();
 });
 
 // Load Projects
 function loadProjects() {
     const grid = document.getElementById('projectsGrid');
     grid.innerHTML = projects.map(project => `
-        <div class="project-card" onclick="openProject(${project.id})">
+        <div class="project-card" onclick="showProjectDetails(${project.id})">
             <div class="project-image">
                 <i class="fas ${project.icon}"></i>
             </div>
             <div class="project-content">
-                <h3 class="project-title">${project.title}</h3>
+                <h3>${project.title}</h3>
                 <p class="project-description">${project.description}</p>
                 <div class="project-tags">
                     ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
@@ -80,46 +111,39 @@ function loadProjects() {
     `).join('');
 }
 
-// Project Modal
-function openProject(id) {
+// Show project details (simple alert - can be customized)
+function showProjectDetails(id) {
     const project = projects.find(p => p.id === id);
-    const modal = document.getElementById('projectModal');
-    const body = document.getElementById('modalBody');
-    
-    body.innerHTML = `
-        <div class="project-image" style="margin: -2rem -2rem 2rem -2rem; border-radius: 20px 20px 0 0;">
-            <i class="fas ${project.icon}"></i>
-        </div>
-        <h2>${project.title}</h2>
-        <p style="color: var(--text-muted); margin: 1rem 0; line-height: 1.8;">${project.details}</p>
-        <div class="project-tags" style="margin: 1.5rem 0;">
-            ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
-        </div>
-        <div style="display: flex; gap: 1rem; margin-top: 2rem;">
-            <a href="${project.demo}" class="btn btn-primary" target="_blank">
-                <i class="fas fa-external-link-alt"></i> Live Demo
-            </a>
-            <a href="${project.github}" class="btn btn-secondary" target="_blank">
-                <i class="fab fa-github"></i> View Code
-            </a>
-        </div>
-    `;
-    
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
+    alert(`${project.title}\n\n${project.details}`);
 }
 
-function closeModal() {
-    const modal = document.getElementById('projectModal');
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
+// Load Documentation
+function loadDocumentation() {
+    const grid = document.getElementById('docsGrid');
+    grid.innerHTML = documentation.map(doc => `
+        <div class="doc-card" onclick="openPdf('${doc.filename}', '${doc.title}')">
+            <div class="doc-icon">
+                <i class="fas ${doc.icon}"></i>
+            </div>
+            <h3>${doc.title}</h3>
+            <p>${doc.description}</p>
+            <span class="doc-btn">
+                <i class="fas fa-external-link-alt"></i> View Document
+            </span>
+        </div>
+    `).join('');
 }
 
 // PDF Viewer
-function openPdf(filename) {
+function openPdf(filename, title) {
     const modal = document.getElementById('pdfModal');
     const viewer = document.getElementById('pdfViewer');
+    const titleElement = document.getElementById('pdfTitle');
+    
+    // Set the PDF source - adjust the path based on your folder structure
     viewer.src = `pdfs/${filename}`;
+    titleElement.textContent = title;
+    
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
@@ -127,6 +151,7 @@ function openPdf(filename) {
 function closePdfModal() {
     const modal = document.getElementById('pdfModal');
     const viewer = document.getElementById('pdfViewer');
+    
     modal.classList.remove('active');
     viewer.src = '';
     document.body.style.overflow = '';
@@ -136,7 +161,6 @@ function closePdfModal() {
 function initTheme() {
     const toggle = document.getElementById('themeToggle');
     const html = document.documentElement;
-    const icon = toggle.querySelector('i');
     
     // Check local storage or system preference
     const savedTheme = localStorage.getItem('theme') || 
@@ -205,14 +229,14 @@ function initNavigation() {
     });
 }
 
-// Typing Effect - Cloud & IT Focused
+// Typing Effect - Updated with cloud-focused phrases
 function initTypingEffect() {
     const text = document.querySelector('.typing-text');
     const phrases = [
         'Cloud & IT Support Intern',
         'AWS & Azure Learner',
-        'Linux & Windows Server',
-        'Cloud Operations & Hosting'
+        'Linux Administrator',
+        'Infrastructure Automation'
     ];
     let phraseIndex = 0;
     let charIndex = 0;
@@ -258,7 +282,7 @@ function initScrollAnimations() {
     }, { threshold: 0.1 });
     
     // Observe elements
-    document.querySelectorAll('.project-card, .skill-category, .pdf-card, .contact-item').forEach(el => {
+    document.querySelectorAll('.project-card, .skill-category, .doc-card, .contact-item, .stat-card').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
         el.style.transition = 'all 0.6s ease';
@@ -290,10 +314,17 @@ document.getElementById('contactForm')?.addEventListener('submit', (e) => {
     }, 1500);
 });
 
+// Set current year in footer
+function setCurrentYear() {
+    const yearElement = document.getElementById('year');
+    if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+    }
+}
+
 // Close modals on outside click
 window.addEventListener('click', (e) => {
     if (e.target.classList.contains('modal')) {
-        closeModal();
         closePdfModal();
     }
 });
@@ -301,7 +332,6 @@ window.addEventListener('click', (e) => {
 // Keyboard navigation
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-        closeModal();
         closePdfModal();
     }
 });

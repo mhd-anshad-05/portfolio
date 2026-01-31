@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Muhammed Anshad M | Cloud & IT Support Intern</title>
-    <meta name="description" content="Cloud & IT Support Intern portfolio – AWS, Linux, Windows Server, Cloud Hosting, Automation">
+    <meta name="description" content="Cloud & IT Support Intern portfolio – AWS, Linux, Windows Server, Zero-Server Infrastructure">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -28,7 +28,8 @@
                 <a href="#home" class="nav-link active">Home</a>
                 <a href="#projects" class="nav-link">Projects</a>
                 <a href="#skills" class="nav-link">Skills</a>
-                <a href="#pdfs" class="nav-link">Documents</a>
+                <a href="#infrastructure" class="nav-link">Infrastructure</a>
+                <a href="#documentation" class="nav-link">Documentation</a>
                 <a href="#contact" class="nav-link">Contact</a>
                 
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
@@ -60,7 +61,7 @@
                     </p>
                     <div class="hero-buttons">
                         <a href="#projects" class="btn btn-primary">
-                            <i class="fas fa-rocket"></i> View Projects
+                            <i class="fas fa-folder-open"></i> View Projects
                         </a>
                         <a href="#contact" class="btn btn-secondary">
                             <i class="fas fa-envelope"></i> Get In Touch
@@ -73,6 +74,9 @@
                         <a href="https://www.linkedin.com/in/muhammed-anshad-m-106a57356/" class="social-link" target="_blank" aria-label="LinkedIn">
                             <i class="fab fa-linkedin"></i>
                         </a>
+                        <a href="mailto:muhammedanshad2005@gmail.com" class="social-link" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
                     </div>
                 </div>
                 <div class="hero-image">
@@ -83,12 +87,12 @@
                             <div class="window-dot yellow"></div>
                             <div class="window-dot green"></div>
                         </div>
-                        <pre class="code-content"><code><span class="code-keyword">const</span> <span class="code-variable">developer</span> = {
-  <span class="code-property">name</span>: <span class="code-string">'Kunji'</span>,
-  <span class="code-property">skills</span>: [<span class="code-string">'React'</span>, <span class="code-string">'Node'</span>, <span class="code-string">'Python'</span>],
-  <span class="code-property">hardWorker</span>: <span class="code-boolean">true</span>,
-  <span class="code-property">problemSolver</span>: <span class="code-boolean">true</span>,
-  <span class="code-method">hire</span>: () => <span class="code-string">'Let\'s build something!'</span>
+                        <pre class="code-content"><code><span class="code-keyword">const</span> <span class="code-variable">cloudEngineer</span> = {
+  <span class="code-property">name</span>: <span class="code-string">'Muhammed Anshad M'</span>,
+  <span class="code-property">role</span>: <span class="code-string">'Cloud & IT Support'</span>,
+  <span class="code-property">skills</span>: [<span class="code-string">'AWS'</span>, <span class="code-string">'Azure'</span>, <span class="code-string">'Linux'</span>],
+  <span class="code-property">infrastructure</span>: <span class="code-string">'Zero-Server'</span>,
+  <span class="code-method">deploy</span>: () => <span class="code-string">'Production Ready'</span>
 };</code></pre>
                     </div>
                 </div>
@@ -108,7 +112,7 @@
             <div class="section-header">
                 <span class="section-tag">Portfolio</span>
                 <h2 class="section-title">Featured Projects</h2>
-                <p class="section-subtitle">Some of my recent work</p>
+                <p class="section-subtitle">Real cloud infrastructure & IT support projects</p>
             </div>
             
             <div class="projects-grid" id="projectsGrid">
@@ -129,66 +133,164 @@
                 <div class="skill-category">
                     <h3><i class="fas fa-cloud"></i> Cloud Platforms</h3>
                     <div class="skill-items">
-                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">Amazon Web Services (AWS)</span>
                         <span class="skill-tag">Microsoft Azure</span>
+                        <span class="skill-tag">EC2</span>
+                        <span class="skill-tag">S3</span>
+                        <span class="skill-tag">RDS</span>
+                        <span class="skill-tag">Auto Scaling</span>
                     </div>
                 </div>
                 
                 <div class="skill-category">
-                    <h3><i class="fas fa-desktop"></i> Operating Systems</h3>
+                    <h3><i class="fas fa-server"></i> Operating Systems</h3>
                     <div class="skill-items">
                         <span class="skill-tag">Linux</span>
                         <span class="skill-tag">Windows Server</span>
+                        <span class="skill-tag">Active Directory</span>
+                        <span class="skill-tag">Nginx</span>
+                        <span class="skill-tag">Apache</span>
+                        <span class="skill-tag">SSH/CLI</span>
                     </div>
                 </div>
                 
                 <div class="skill-category">
-                    <h3><i class="fas fa-building"></i> Enterprise & IT Tools</h3>
+                    <h3><i class="fas fa-network-wired"></i> Networking & Security</h3>
+                    <div class="skill-items">
+                        <span class="skill-tag">DNS Configuration</span>
+                        <span class="skill-tag">SSL/TLS</span>
+                        <span class="skill-tag">Cloudflare</span>
+                        <span class="skill-tag">Load Balancing</span>
+                        <span class="skill-tag">Security Groups</span>
+                        <span class="skill-tag">IAM</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3><i class="fas fa-briefcase"></i> Enterprise Tools</h3>
                     <div class="skill-items">
                         <span class="skill-tag">Microsoft 365</span>
                         <span class="skill-tag">Google Workspace</span>
-                        <span class="skill-tag">Active Directory</span>
-                    </div>
-                </div>
-                
-                <div class="skill-category">
-                    <h3><i class="fas fa-network-wired"></i> Networking & Hosting</h3>
-                    <div class="skill-items">
-                        <span class="skill-tag">DNS</span>
-                        <span class="skill-tag">Web Hosting</span>
-                        <span class="skill-tag">SSL Configuration</span>
+                        <span class="skill-tag">AWS CLI</span>
+                        <span class="skill-tag">Git/GitHub</span>
+                        <span class="skill-tag">CI/CD (GitHub Actions)</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PDF/Documents Section -->
-    <section id="pdfs" class="pdfs">
+    <!-- Infrastructure Section (NEW) -->
+    <section id="infrastructure" class="infrastructure">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Documents</span>
-                <h2 class="section-title">Resume & Certificates</h2>
+                <span class="section-tag">Technical Achievement</span>
+                <h2 class="section-title">Zero-Server Infrastructure</h2>
+                <p class="section-subtitle">How this portfolio is hosted</p>
             </div>
             
-            <div class="pdfs-grid" id="pdfsGrid">
-                <div class="pdf-card" onclick="openPdf('resume.pdf')">
-                    <div class="pdf-icon">
-                        <i class="fas fa-file-pdf"></i>
+            <div class="infra-content">
+                <div class="infra-text">
+                    <p>
+                        This portfolio demonstrates a <strong>Zero-Server Architecture</strong> — 
+                        a secure, cost-effective hosting solution that repurposes an Android device 
+                        as an edge server instead of using traditional VPS hosting.
+                    </p>
+                    
+                    <div class="infra-stats">
+                        <div class="stat-card">
+                            <i class="fas fa-dollar-sign"></i>
+                            <h4>$0/month</h4>
+                            <p>Hosting Cost</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-shield-alt"></i>
+                            <h4>Zero Ports</h4>
+                            <p>Public Exposure</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-leaf"></i>
+                            <h4>ARM64</h4>
+                            <p>Low Power</p>
+                        </div>
                     </div>
-                    <h3>Resume</h3>
-                    <p>Professional CV</p>
-                    <span class="pdf-btn">View PDF</span>
+
+                    <h3>Architecture Components</h3>
+                    <ul class="infra-list">
+                        <li><strong>Host:</strong> Android (ARM64) using Termux</li>
+                        <li><strong>Web Server:</strong> Nginx</li>
+                        <li><strong>Security:</strong> Cloudflare Zero Trust (encrypted tunnel)</li>
+                        <li><strong>Deployment:</strong> GitHub Actions (CI/CD)</li>
+                        <li><strong>Domain:</strong> kunjidev.shop</li>
+                    </ul>
+
+                    <h3>How It Works</h3>
+                    <p>
+                        Traffic flows from visitors → Cloudflare Edge → Encrypted Tunnel → Android Device → Nginx.
+                        This provides SSL termination, DDoS protection, and complete IP obfuscation without 
+                        requiring port forwarding or exposing the device to the public internet.
+                    </p>
+
+                    <h3>Key Benefits</h3>
+                    <ul class="infra-list">
+                        <li>No public IP exposure or inbound ports open</li>
+                        <li>Automated deployment through GitHub Actions</li>
+                        <li>Enterprise-grade security via Cloudflare</li>
+                        <li>Real DevOps & infrastructure automation experience</li>
+                    </ul>
                 </div>
-                
-                <div class="pdf-card" onclick="openPdf('certificates.pdf')">
-                    <div class="pdf-icon">
-                        <i class="fas fa-certificate"></i>
+
+                <div class="infra-diagram">
+                    <div class="diagram-card">
+                        <h4>Traffic Flow</h4>
+                        <div class="flow-step">
+                            <span class="step-number">1</span>
+                            <div class="step-content">
+                                <strong>Visitor</strong>
+                                <p>kunjidev.shop</p>
+                            </div>
+                        </div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-step">
+                            <span class="step-number">2</span>
+                            <div class="step-content">
+                                <strong>Cloudflare Edge</strong>
+                                <p>SSL, DDoS Protection</p>
+                            </div>
+                        </div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-step">
+                            <span class="step-number">3</span>
+                            <div class="step-content">
+                                <strong>Encrypted Tunnel</strong>
+                                <p>Zero Trust Access</p>
+                            </div>
+                        </div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-step">
+                            <span class="step-number">4</span>
+                            <div class="step-content">
+                                <strong>Android + Nginx</strong>
+                                <p>Portfolio Delivery</p>
+                            </div>
+                        </div>
                     </div>
-                    <h3>Certificates</h3>
-                    <p>Accomplishments</p>
-                    <span class="pdf-btn">View PDF</span>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Section (NEW - for PDFs) -->
+    <section id="documentation" class="documentation">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Documentation</span>
+                <h2 class="section-title">Project Documentation</h2>
+                <p class="section-subtitle">Step-by-step guides with screenshots</p>
+            </div>
+            
+            <div class="docs-grid" id="docsGrid">
+                <!-- Documentation cards injected via JavaScript -->
             </div>
         </div>
     </section>
@@ -207,25 +309,25 @@
                         <i class="fas fa-envelope"></i>
                         <div>
                             <h3>Email</h3>
-                            <p>muhammedanshad2005@gmail.com</p>
+                            <a href="mailto:muhammedanshad2005@gmail.com">muhammedanshad2005@gmail.com</a>
                         </div>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-phone"></i>
                         <div>
                             <h3>Phone</h3>
-                            <p>+91 8589810735</p>
+                            <a href="tel:+918589810735">+91 8589810735</a>
                         </div>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
                         <div>
                             <h3>Location</h3>
-                            <p>India</p>
+                            <p>Tirur, Kerala, India</p>
                         </div>
                     </div>
                     <div class="contact-item">
-                        <i class="fas fa-clock"></i>
+                        <i class="fas fa-briefcase"></i>
                         <div>
                             <h3>Availability</h3>
                             <p>Open to Internships & Entry-Level Roles</p>
@@ -257,25 +359,24 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Kunji Dev. Built with <i class="fas fa-heart"></i> on Termux + Nginx</p>
+            <p>&copy; <span id="year"></span> Muhammed Anshad M. Built with <i class="fas fa-heart"></i> on Termux + Nginx</p>
             <div class="footer-links">
                 <a href="https://kunjidev.shop">kunjidev.shop</a>
+                <span class="footer-separator">•</span>
+                <a href="https://github.com/mhd-anshad-05">GitHub</a>
+                <span class="footer-separator">•</span>
+                <a href="https://www.linkedin.com/in/muhammed-anshad-m-106a57356/">LinkedIn</a>
             </div>
         </div>
     </footer>
 
-    <!-- Project Modal -->
-    <div class="modal" id="projectModal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">&times;</button>
-            <div id="modalBody"></div>
-        </div>
-    </div>
-
     <!-- PDF Viewer Modal -->
     <div class="modal" id="pdfModal">
         <div class="modal-content modal-large">
-            <button class="modal-close" onclick="closePdfModal()">&times;</button>
+            <div class="modal-header">
+                <h3 id="pdfTitle">Document</h3>
+                <button class="modal-close" onclick="closePdfModal()">&times;</button>
+            </div>
             <iframe id="pdfViewer" src="" frameborder="0"></iframe>
         </div>
     </div>
