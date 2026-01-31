@@ -10,26 +10,21 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # This step installs the cloudflared tool on the GitHub runner
-      - name: Install Cloudflared
+      - name: Install Cloudflared on Runner
         run: |
           curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -o cloudflared
           chmod +x cloudflared
           sudo mv cloudflared /usr/local/bin/
 
-      # This step tells SSH how to connect through the Cloudflare Tunnel
-      - name: Configure SSH for Cloudflare
-        run: |
-          mkdir -p ~/.ssh
-          echo "Host ssh.kunjidev.shop
-            ProxyCommand /usr/local/bin/cloudflared access ssh --hostname %h" >> ~/.ssh/config
-
       - name: Deploy via SCP
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secrets.SSH_HOST }}
+          host: ssh.kunjidev.shop
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22 # Note: Inside the tunnel, we use standard SSH logic
+          port: 22
+          # This tells GitHub to use the cloudflared tool to enter the tunnel
+          proxy_host: ssh.kunjidev.shop
+          proxy_command: /usr/local/bin/cloudflared access ssh --hostname %h
           source: "index.html,style.css,script.js,pdfs/*,img/*"
           target: "/data/data/com.termux/files/usr/share/nginx/html/"
