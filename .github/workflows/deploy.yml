@@ -34,5 +34,14 @@ jobs:
 
       - name: Deploy via Native SCP
         run: |
+          scp -r ./* ${{ secrets.SSH_USER }}@ssh.kunjidev.shop:/data/data/com.termux/files/usr/share/nginx/html/
+
+      # ADD THIS STEP BELOW
+      - name: Reload Nginx on Termux
+        run: |
+          ssh ${{ secrets.SSH_USER }}@ssh.kunjidev.shop "nginx -s reload"
+
+      - name: Deploy via Native SCP
+        run: |
           # We use the -r flag to copy everything to your Nginx folder
           scp -r ./* ${{ secrets.SSH_USER }}@ssh.kunjidev.shop:/data/data/com.termux/files/usr/share/nginx/html/
