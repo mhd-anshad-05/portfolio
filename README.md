@@ -1,5 +1,3 @@
-# portfolio
-
 # 📱 Android-Powered Portfolio with Automated CI/CD
 A high-performance portfolio website hosted on a "Zero-Server" architecture using an Android device (Termux), Cloudflare Zero Trust, and GitHub Actions.
 
