@@ -1,249 +1,45 @@
-<<<<<<< HEAD
-# 📱 Android-Powered Portfolio with Zero-Server Infrastructure
+# Muhammed Anshad – Portfolio Website
 
-A production-grade portfolio website hosted on a **Zero-Server architecture** using an Android device (Termux), Cloudflare Zero Trust, and GitHub Actions for automated CI/CD.
+This is my personal portfolio website showcasing my background in **Computer Engineering**, **Cloud Computing**, and **IT Support**.
 
-## 🚀 Architecture Overview
-
-This project demonstrates how to repurpose mobile hardware into a secure, production-grade web server without traditional VPS hosting.
-
-- **Host Machine:** Android (ARM64) via Termux
-- **Web Server:** Nginx (optimized for low-power ARM)
-- **Security:** Cloudflare Tunnel (Zero Trust) - *No open ports/Port Forwarding needed*
-- **Deployment:** GitHub Actions with Cloudflare tunnel bridge
-=======
-# 📱 Android-Powered Portfolio with Automated CI/CD
-A high-performance portfolio website hosted on a "Zero-Server" architecture using an Android device (Termux), Cloudflare Zero Trust, and GitHub Actions.
-
-## 🚀 Architecture Overview
-This project demonstrates how to repurpose mobile hardware into a secure, production-grade web server. 
-
-- **Host Machine:** Android (ARM64) via Termux
-- **Web Server:** Nginx (optimized for low-power ARM)
-- **Security:** Cloudflare Tunnel (Zero Trust) - *No open ports/Port Forwarding needed.*
-- **Deployment:** GitHub Actions with a custom Cloudflare `ProxyCommand` bridge.
->>>>>>> 4028b3058b55467e918831293332568bf8055e0c
-- **Domain:** kunjidev.shop (Managed via Cloudflare DNS)
-
-## 🛠️ Key Components & Setup
-
-<<<<<<< HEAD
-### 1. Mobile Server (Termux)
-
-The site runs inside a Termux environment, utilizing `sshd` for secure access and `cloudflared` to bridge to the internet.
-
-- **Service Management:** `sshd` on port 8022
-- **Connectivity:** `cloudflared` daemon running as a background service
-- **Web Server:** Nginx serving static content
-
-### 2. Cloudflare Tunnel
-
-Instead of exposing a home IP address, this implements a **Cloudflare Tunnel**.
-
-- Traffic flows: Visitor → Cloudflare Edge → Encrypted Tunnel → Termux
-- **Benefits:** 
-  - Built-in DDoS protection
-  - SSL termination at the edge
-  - Complete IP obfuscation
-  - No open inbound ports required
-
-### 3. CI/CD Pipeline
-
-Whenever code is pushed to the `main` branch, a GitHub Action triggers:
-
-1. **Runner Initialization:** Ubuntu-latest environment spins up
-2. **Tunnel Bridge:** Installs `cloudflared` on the GitHub runner
-3. **Secure Handshake:** Uses a `ProxyCommand` to tunnel into the tunnel
-4. **Automated SCP:** Transfers files directly to Nginx root directory
-
-## 📊 Architecture Diagram
-
-```
-┌─────────────┐
-│   Developer │
-└──────┬──────┘
-       │ git push
-       ▼
-┌─────────────────┐
-│  GitHub Repo    │
-└──────┬──────────┘
-       │ triggers
-       ▼
-┌─────────────────┐      ┌──────────────────┐
-│ GitHub Actions  │─────▶│ Cloudflare Edge  │
-└─────────────────┘      └────────┬─────────┘
-                                  │
-                          Encrypted Tunnel
-                                  │
-                         ┌────────▼─────────┐
-                         │ Android Device   │
-                         │  - Termux        │
-                         │  - Nginx         │
-                         │  - cloudflared   │
-                         └──────────────────┘
-```
-
-## 💡 Why This Matters
-
-### Cost Efficiency
-- **$0/month** hosting cost (excluding domain)
-- No VPS or cloud compute fees
-- Utilizes existing hardware
-
-### Security
-- **Zero exposed inbound ports** to public internet
-- Enterprise-grade security via Cloudflare Zero Trust
-- Encrypted tunnel for all traffic
-- DDoS protection included
-
-### Environmental Impact
-- ARM-based low-power hosting
-- Significantly lower energy consumption than x86 servers
-- Repurposes existing mobile hardware
-
-### Learning Value
-- Real DevOps & infrastructure concepts
-- Understanding of Zero Trust architecture
-- Practical CI/CD implementation
-- Cloud security best practices
-
-## 📜 How to Reproduce
-
-### Prerequisites
-- Android device with Termux installed
-- Cloudflare account (free tier works)
-- GitHub account
-- Domain name (optional but recommended)
-
-### Step 1: Termux Setup
-
-```bash
-# Update packages
-pkg update && pkg upgrade
-
-# Install required packages
-pkg install nginx openssh
-
-# Install cloudflared
-wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64
-chmod +x cloudflared-linux-arm64
-mv cloudflared-linux-arm64 $PREFIX/bin/cloudflared
-
-# Configure nginx
-nginx
-```
-
-### Step 2: Cloudflare Tunnel
-
-1. Login to Cloudflare Zero Trust Dashboard
-2. Create a new tunnel
-3. Install connector on Termux device
-4. Route `yourdomain.com` to `http://localhost:80`
-5. Route `ssh.yourdomain.com` to `ssh://localhost:8022`
-
-### Step 3: GitHub Actions
-
-Add these secrets to your GitHub repository:
-- `SSH_PRIVATE_KEY` - Your SSH private key
-- `SSH_USER` - SSH username (usually your Termux user)
-- `SSH_HOST` - Your Cloudflare tunnel SSH hostname
-
-Create `.github/workflows/deploy.yml`:
-
-```yaml
-name: Deploy to Zero-Server
-
-on:
-  push:
-    branches: [ main ]
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    
-    steps:
-    - uses: actions/checkout@v2
-    
-    - name: Install cloudflared
-      run: |
-        wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
-        chmod +x cloudflared-linux-amd64
-        sudo mv cloudflared-linux-amd64 /usr/local/bin/cloudflared
-    
-    - name: Setup SSH
-      run: |
-        mkdir -p ~/.ssh
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        echo "Host ${{ secrets.SSH_HOST }}" >> ~/.ssh/config
-        echo "  ProxyCommand cloudflared access ssh --hostname %h" >> ~/.ssh/config
-    
-    - name: Deploy files
-      run: |
-        scp -r ./* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/data/data/com.termux/files/usr/share/nginx/html/
-```
-
-## 🎯 Project Purpose
-
-This portfolio demonstrates:
-
-1. **Cloud Infrastructure Skills** - Understanding of modern cloud concepts
-2. **Security-First Thinking** - Zero Trust implementation
-3. **DevOps Automation** - CI/CD pipeline development
-4. **Problem Solving** - Creative solution to hosting challenges
-5. **Cost Optimization** - Efficient resource utilization
-
-## 📚 Tech Stack
-
-- **Frontend:** HTML5, CSS3 (with custom properties), Vanilla JavaScript
-- **Server:** Nginx on Termux (Android)
-- **Security:** Cloudflare Zero Trust + Tunnel
-- **CI/CD:** GitHub Actions
-- **Fonts:** Work Sans, Space Mono
-- **Icons:** Font Awesome 6
-
-## 📈 Performance
-
-- **Page Load:** < 1s (optimized static assets)
-- **Uptime:** 99.9% (mobile device always-on)
-- **Global CDN:** Cloudflare edge network
-- **SSL/TLS:** A+ rating (Cloudflare managed)
-
-## 🔗 Live Demo
-
-Visit: [kunjidev.shop](https://kunjidev.shop)
-
-## 📄 License
-
-This project is open source and available for educational purposes.
+The portfolio highlights my technical skills, internship experience, and projects, and is designed to give recruiters a quick overview of my profile.
 
 ---
 
-**Built by Muhammed Anshad M** - Demonstrating practical cloud infrastructure and DevOps skills without relying on traditional hosting.
-=======
-### 1. The Mobile Server (Termux)
-The site runs inside a Termux environment, utilizing `sshd` for secure access and `cloudflared` to bridge to the internet.
-* **Service Management:** `sshd` on port 8022.
-* **Connectivity:** `cloudflared` daemon running as a background service.
+## 👨‍💻 About Me
 
-### 2. The Cloudflare Tunnel
-Instead of exposing my home IP address, I implemented a **Cloudflare Tunnel**. 
-- Traffic flows from the visitor -> Cloudflare Edge -> Encrypted Tunnel -> Termux.
-- **Benefits:** Built-in DDoS protection, SSL termination at the edge, and complete IP obfuscation.
+I am a **Diploma in Computer Engineering graduate (2025)**, currently pursuing a **Skill Diploma in Cloud Computing**.  
+I have hands-on experience as a **Cloud & IT Support Intern**, working with cloud platforms, servers, hosting, and enterprise IT tools.
 
-### 3. CI/CD Pipeline (The "Magic")
-Whenever code is pushed to the `main` branch, a GitHub Action triggers:
-1. **Runner Initialization:** Ubuntu-latest environment spins up.
-2. **Tunnel Bridge:** Installs `cloudflared` on the GitHub runner.
-3. **Secure Handshake:** Uses a `ProxyCommand` to "tunnel into the tunnel" to reach the phone.
-4. **Automated SCP:** Transfers `index.html`, `CSS`, and assets directly to the Nginx root directory.
+I am actively seeking **entry-level IT Support / Cloud Support roles** where I can learn, contribute, and grow.
 
-## ⚙️ Deployment Workflow
-```mermaid
-graph LR
-  A[Developer] -->|Push| B(GitHub Repo)
-  B --> C{GitHub Actions}
-  C -->|Proxy via Cloudflared| D[Cloudflare Network]
-  D -->|Secure Tunnel| E[Android Phone]
-  E -->|Nginx| F[Live Site]
->>>>>>> 4028b3058b55467e918831293332568bf8055e0c
+---
+
+## 🛠️ Skills & Technologies
+
+- **Cloud Platforms:** AWS, Microsoft Azure  
+- **Operating Systems:** Linux, Windows Server  
+- **Enterprise Tools:** Microsoft 365, Google Workspace  
+- **Networking & Hosting:** DNS, SSL, Web Hosting, Active Directory  
+- **Programming:** Python, Java, C  
+- **Web Technologies:** HTML, CSS, JavaScript  
+
+---
+
+## 🌐 Portfolio Website
+
+This website is built using:
+- HTML, CSS, JavaScript  
+- Deployed as a static web application  
+- Optimized for simple, clean presentation
+
+---
+
+## 📫 Contact
+
+- Email: **muhammedanshad2005@gmail.com**  
+- GitHub: https://github.com/mhd-anshad-05  
+
+---
+
+> This repository represents my learning journey and hands-on practice in web development and cloud-related technologies.
